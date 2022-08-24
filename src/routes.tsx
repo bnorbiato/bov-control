@@ -1,13 +1,13 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import Dashboard from './pages/Dashboard';
+import ChecklistList from './components/list';
 
 const Routes = () => {
     return (
         <BrowserRouter>
             <Switch>
-                <Route path="/" component={ Dashboard }/>
+                <Route path="/" component={ ChecklistList }/>
             </Switch>
         </BrowserRouter>
     );
