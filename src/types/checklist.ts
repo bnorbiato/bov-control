@@ -1,5 +1,5 @@
 export default interface IChecklistData {
-    _id?: any | null,
+    _id?: null,
     type: string,
     amount_of_milk_produced: number,
     farmer: {
