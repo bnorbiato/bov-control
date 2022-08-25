@@ -1,10 +1,12 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
-import { 
+import {
     useParams
 } from 'react-router-dom';
 
 import ChecklistDataService from "../../../services/services";
 import IChecklistData from "../../../hooks/checklist";
+import { Layout } from "../../../components/Layout";
+import Headline from "../../../components/Headline";
 
 const ChecklistDetails: React.FC = () => {
     const { _id } = useParams();
@@ -85,7 +87,7 @@ const ChecklistDetails: React.FC = () => {
         ChecklistDataService.updateChecklist(currentChecklist._id, data)
             .then((response: any) => {
                 console.log(response.data);
-                setCurrentChecklist({ ...currentChecklist});
+                setCurrentChecklist({ ...currentChecklist });
                 setMessage("The status was updated successfully!");
             })
             .catch((e: Error) => {
@@ -105,67 +107,40 @@ const ChecklistDetails: React.FC = () => {
     };
 
     return (
-        <div>
+        <Layout>
             {currentChecklist ? (
-                <div className="edit-form">
-                    <h4>Checklist</h4>
-                    <form>
-                        <div className="form-group">
-                            <label htmlFor="title">Title</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="title"
-                                name="title"
-                                value={currentChecklist.type}
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="description">Description</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="description"
-                                name="description"
-                                value={currentChecklist.amount_of_milk_produced}
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                    </form>
+                <>
+                    <Headline
+                        headline={currentChecklist.from.name}
+                        text={currentChecklist.farmer.city}
+                    />
 
-                    {currentChecklist.had_supervision ? (
-                        <button
-                            className="badge badge-primary mr-2"
-                            onClick={() => updateExistChecklist(false)}
-                        >
-                            UnPublish
-                        </button>
-                    ) : (
-                        <button
-                            className="badge badge-primary mr-2"
-                            onClick={() => updateExistChecklist(true)}
-                        >
-                            Publish
-                        </button>
-                    )}
-
-                    <button
-                        type="submit"
-                        className="badge badge-success"
-                        onClick={updateChecklist}
-                    >
-                        Update
-                    </button>
-                    <p>{message}</p>
-                </div>
+                    <div className="edit-form">
+                        <form>
+                            <div className="form-group">
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="title"
+                                    name="title"
+                                    value={currentChecklist.type}
+                                    onChange={handleInputChange} />
+                            </div>
+                            <div className="form-group">
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="description"
+                                    name="description"
+                                    value={currentChecklist.amount_of_milk_produced}
+                                    onChange={handleInputChange} />
+                            </div>
+                        </form>
+                    </div></>
             ) : (
-                <div>
-                    <br />
-                    <p>Please click on a Checklist...</p>
-                </div>
+                ""
             )}
-        </div>
+        </Layout>
     );
 };
 

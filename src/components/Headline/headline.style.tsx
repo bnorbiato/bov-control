@@ -5,7 +5,7 @@ export const TextWrapper = styled.div`
     padding: 20px 0;
 `;
 
-export const Headline = styled.h4`
+export const HeadlineText = styled.h4`
     padding: 0 15px 0 0;
     margin: 0;
     font-size: 20px;

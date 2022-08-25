@@ -1,42 +1,33 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// @ts-ignore
-import styled from "styled-components";
+
+import {
+    MenuWrapper,
+    MenuItemText,
+    MenuItemIcon
+} from "./menuItem.style";
 
 interface MenuItemProps {
     icon?: any;
     text: string;
     link?: string;
+    from: string;
 }
-
-const MenuWrapper = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 0;
-    position: relative;
-    flex-direction: row;
-`;
-
-const MenuItemText = styled.p`
-    text-decoration: none;
-    color: #252F3F;
-    font-size: 12px;
-`;
 
 const MenuItem: React.FC<MenuItemProps> = ({
     icon,
     text,
     link,
+    from
 }) => {
     return (
         <Link 
-            to={`${link}`}
+            to={`${link ? `/${from}${link}` : "#"}`}
         >
             <MenuWrapper>
-                <div className="menuItemIcon">
+                <MenuItemIcon>
                     {icon}
-                </div>
+                </MenuItemIcon>
 
                 <MenuItemText>
                     {text}

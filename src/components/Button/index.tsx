@@ -1,17 +1,20 @@
-// @ts-ignore
-import styled from "styled-components";
+import React from "react";
+import {
+    ButtonWrapper,
+    ButtonText
+} from "./button.style";
 
-export const ButtonWrapper = styled.div`
-    display: flex;
-    align-items: flex-end;
-    color: #2E8B57;
-    background-color: #ffffff;
-    border-radius: 10px;
-    cursor: pointer;
-`;
+interface ButtonProps {
+    text: string;
+}
 
-export const ButtonText = styled.p`
-    margin: 0;
-    padding: 0;
-    font-size: 16px;
-`;
+const Button: React.FC<ButtonProps> = ({
+    text
+}) => {
+    return (
+        <ButtonWrapper>
+        </ButtonWrapper>
+    );
+};
+
+export default Button;

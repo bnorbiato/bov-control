@@ -2,22 +2,23 @@ import React, {
     useState,
     useEffect
 } from "react";
-import {
-    Row,
-    Col
-} from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 
 import ChecklistDataService from "../../../services/services";
 import IChecklistData from "../../../hooks/checklist";
 import { Layout } from "../../../components/Layout";
-import { Headline, TextWrapper, Text } from "../../../components/Texts";
+import Headline from "../../../components/Headline";
 import Card from "../../../components/Card";
+import MiniCard from "../../../components/MiniCard";
+import EmptyData from "../../../components/EmptyData";
 
 const Checklists: React.FC = () => {
-
     const [checklists, setChecklists] = useState<Array<IChecklistData>>([]);
     const [currentChecklist, setCurrentChecklist] = useState<IChecklistData | null>(null);
     const [currentIndex, setCurrentIndex] = useState<number>(-1);
+
+    const history = useHistory();
 
     useEffect(() => {
         retrieveChecklists();
@@ -39,20 +40,19 @@ const Checklists: React.FC = () => {
         setCurrentIndex(index);
     };
 
+    const goToChecklist = () => {
+        history.push('/checklist');
+    }
+
     return (
         <Layout>
-            <TextWrapper>
-                <Headline>
-                    Bem-vindo ao seu dashboard.
-                </Headline>
-
-                <Text>
-                    Clique no nome da fazenda para visualizar mais informações.
-                </Text>
-            </TextWrapper>
+            <Headline
+                headline={"Bem-vindo ao seu dashboard."}
+                text={""}
+            />
 
             <Row>
-                <Col sm={6} md={6}>
+                <Col md={8}>
                     {checklists &&
                         checklists.map((checklist, index) => (
                             <div className={
@@ -71,12 +71,31 @@ const Checklists: React.FC = () => {
                         ))}
                 </Col>
 
-                <Col sm={6} md={6}>
+                <Col md={4}>
+                    <Headline
+                        headline={""}
+                        text={"Selecione uma fazenda para visualizar mais informações."}
+                    />
+
                     {currentChecklist ? (
-                        <p>
-                            {currentChecklist.type}
-                        </p>
-                    ) : ''}
+                        <>
+                            <MiniCard
+                                title={currentChecklist.from.name}
+                                text={currentChecklist.farmer.city}
+                                subtitle={currentChecklist.farmer.name}
+                                date={currentChecklist.updated_at}
+                                numberOfCows={currentChecklist.number_of_cows_head}
+                            />
+                            <Button
+                                onClick={() => {
+                                    history.push("/dashboard/checklist/" + currentChecklist._id);
+                                  }}
+                            > Editar </Button>
+                        </>
+                    ) : <EmptyData
+                        title={"Sem informações para exibir"}
+                    />
+                    }
                 </Col>
             </Row>
         </Layout>

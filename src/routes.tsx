@@ -5,11 +5,13 @@ import {
 } from 'react-router-dom';
 
 import Dashboard from './pages/Dashboard';
+import Landing from './components/LandingPage';
 
 const Routes = () => {
     return (
         <BrowserRouter>
-            <Route path="/" exact component={Dashboard} />
+            <Route path="/" exact component={Landing} />
+            <Route path="/dashboard" component={Dashboard} />
         </BrowserRouter>
     );
 };

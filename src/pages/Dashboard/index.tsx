@@ -4,32 +4,18 @@ import {
     Switch,
     Route
 } from "react-router-dom";
-// @ts-ignore
-import styled from "styled-components";
 
 import Header from "../../components/Header";
 import SideBar from "../../components/Sidebar";
 import AddChecklist from "./AddChecklist";
 import Checklists from "./Checklists";
+import ChecklistDetails from "./ChecklistDetails";
+import {
+    DashboardWrapper,
+    DashboardContent,
+    ContentMain
+} from "./dashboard.style";
 
-const DashboardWrapper = styled.div`
-    height: 100vh;
-    width: 100%;
-    overflow: hidden;
-`;
-
-const DashboardContent = styled.div`
-    position: relative;
-`;
-
-const ContentMain = styled.div`
-    overflow-x: auto;
-    margin-left: 120px;
-    background-color: #F4F5F9;
-    height: 100vh;
-    width: calc(100% - 70px);
-    position: relative;
-`;
 
 const Dashboard: React.FC = () => {
     let { path } = useRouteMatch();
@@ -43,14 +29,21 @@ const Dashboard: React.FC = () => {
                         <Header />
                         <Switch>
                             <Route
-                                path="/"
+                                path={path}
                                 exact
                                 component={Checklists}
                             />
 
                             <Route
-                                path="/adicionar"
+                                path={`${path}/adicionar`}
+                                exact
                                 component={AddChecklist}
+                            />
+
+                            <Route
+                                path={`${path}/checklist/:_id`}
+                                exact
+                                component={ChecklistDetails}
                             />
                         </Switch>
                     </ContentMain>

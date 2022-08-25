@@ -5,6 +5,8 @@ import React, {
 
 import ChecklistDataService from "../../../services/services";
 import IChecklistData from "../../../hooks/checklist";
+import { Layout } from "../../../components/Layout";
+import Headline from "../../../components/Headline";
 
 const AddChecklist: React.FC = () => {
     const initialChecklistState = {
@@ -92,48 +94,25 @@ const AddChecklist: React.FC = () => {
     };
 
     return (
-        <div className="submit-form">
-            {submitted ? (
-                <div>
-                    <h4>You submitted successfully!</h4>
-                    <button className="btn btn-success" onClick={newChecklist}>
-                        Add
-                    </button>
-                </div>
-            ) : (
-                <div>
-                    <div className="form-group">
-                        <label htmlFor="title">Title</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="title"
-                            required
-                            value={checklist.type}
-                            onChange={handleInputChange}
-                            name="title"
-                        />
+        <Layout>
+            <Headline
+                headline={"Adicionar nova fazenda"}
+                text={"Preencha os dados no formulário"}
+            />
+            <div className="submit-form">
+                {submitted ? (
+                    <div>
+                        <h4>You submitted successfully!</h4>
+                        <button className="btn btn-success" onClick={newChecklist}>
+                            Add
+                        </button>
                     </div>
-
-                    <div className="form-group">
-                        <label htmlFor="description">Description</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="description"
-                            required
-                            value={checklist.amount_of_milk_produced}
-                            onChange={handleInputChange}
-                            name="description"
-                        />
+                ) : (
+                    <div>
                     </div>
-
-                    <button onClick={saveChecklist} className="btn btn-success">
-                        Submit
-                    </button>
-                </div>
-            )}
-        </div>
+                )}
+            </div>
+        </Layout>
     );
 };
 
