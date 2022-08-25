@@ -3,23 +3,46 @@ import React from "react";
 import styled from "styled-components";
 
 const HeaderWrapper = styled.div`
-    padding: 10px 20px;
-    margin: 0;
     width: 100%;
-    height: 50px;
+    position: relative;
+    top: 0;
+    margin: 0 0 20px 0;
+    padding: 10px 0;
     background-color: #2E8B57;
 `;
-const LOGO = require("../../assets/images/logo.png");
+
+const HeaderTitlesWrapper = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 20px;
+`;
+
+const HeaderTitle = styled.h2`
+    padding: 0;
+    margin: 0;
+    color: #ffffff;
+`;
+
+const HeaderSubtitle = styled.p`
+    padding: 0;
+    margin: 0;
+    color: #ffffff;
+`;
 
 const Header: React.FC = () => {
     return (
         <div className="header">
             <HeaderWrapper>
-                <img
-                    src={LOGO}
-                    width='50px'
-                    alt="Bov Control"
-                />
+                <HeaderTitlesWrapper>
+                    <HeaderTitle>
+                        Bov Control
+                    </HeaderTitle>
+                    <HeaderSubtitle>
+                        Controle de fazendas registradas
+                    </HeaderSubtitle>
+                </HeaderTitlesWrapper>
             </HeaderWrapper>
         </div>
     );

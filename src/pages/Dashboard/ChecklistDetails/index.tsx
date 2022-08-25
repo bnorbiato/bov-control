@@ -4,7 +4,7 @@ import {
 } from 'react-router-dom';
 
 import ChecklistDataService from "../../../services/services";
-import IChecklistData from "../../../types/checklist";
+import IChecklistData from "../../../hooks/checklist";
 
 const ChecklistDetails: React.FC = () => {
     const { _id } = useParams();
@@ -12,7 +12,7 @@ const ChecklistDetails: React.FC = () => {
     const initialChecklistState = {
         _id: null,
         type: "",
-        amount_of_milk_produced: "",
+        amount_of_milk_produced: 0,
         farmer: {
             name: "",
             city: ""
@@ -23,14 +23,14 @@ const ChecklistDetails: React.FC = () => {
         to: {
             name: ""
         },
-        number_of_cows_head: "",
+        number_of_cows_head: 0,
         had_supervision: false,
         location: {
-            latitude: "",
-            longitude: ""
+            latitude: 0,
+            longitude: 0
         },
-        created_at: "",
-        updated_at: ""
+        created_at: new Date(),
+        updated_at: new Date(),
     };
 
     const [currentChecklist, setCurrentChecklist] = useState<IChecklistData>(initialChecklistState);
@@ -61,15 +61,25 @@ const ChecklistDetails: React.FC = () => {
         var data = {
             _id: currentChecklist._id,
             type: currentChecklist.type,
-            amountOfMilkProduced: currentChecklist.amount_of_milk_produced,
-            farmerName: currentChecklist.farmer.name,
-            farmerCity: currentChecklist.farmer.city,
-            from: currentChecklist.from.name,
-            to: currentChecklist.to.name,
-            numberOfCowsHead: currentChecklist.number_of_cows_head,
-            hadSupervision: currentChecklist.had_supervision,
-            locationLatitude: currentChecklist.location.latitude,
-            locationLongitude: currentChecklist.location.longitude
+            amount_of_milk_produced: currentChecklist.amount_of_milk_produced,
+            farmer: {
+                name: currentChecklist.farmer.name,
+                city: currentChecklist.farmer.city,
+            },
+            from: {
+                name: currentChecklist.from.name,
+            },
+            to: {
+                name: currentChecklist.to.name,
+            },
+            number_of_cows_head: currentChecklist.number_of_cows_head,
+            had_supervision: currentChecklist.had_supervision,
+            location: {
+                latitude: currentChecklist.location.latitude,
+                longitude: currentChecklist.location.longitude,
+            },
+            created_at: currentChecklist.created_at,
+            updated_at: currentChecklist.updated_at
         };
 
         ChecklistDataService.updateChecklist(currentChecklist._id, data)

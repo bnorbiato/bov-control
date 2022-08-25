@@ -1,5 +1,5 @@
 import api from "./api";
-import IChecklistData from "../types/checklist"; 
+import IChecklistData from "../hooks/checklist"; 
 
 const getAllChecklists = () => {
     return api.get<Array<IChecklistData>>("/checkList");
